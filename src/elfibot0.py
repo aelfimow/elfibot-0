@@ -11,24 +11,32 @@ def parse_msg(chat_id, messageText):
         elfibot0.sendMessage(chat_id, 'Command stop received')
         return
 
-    elfibot0.sendMessage(chat_id, 'Unknown command received: ' + messageText)
+    errorMsg = 'Unknown command received: ' + messageText
+    print(errorMsg)
+    elfibot0.sendMessage(chat_id, errorMsg)
 
 def elfibot0_msg_handler(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print(content_type, chat_type, chat_id)
     if content_type == 'text':
         messageText = msg['text']
         parse_msg(chat_id, messageText)
+        return
+
+    errorMsg = 'Unknown content type: ' + content_type
+    print(errorMsg)
+    elfibot0.sendMessage(chat_id, errorMsg)
 
 def elfibot0_main():
     global elfibot0
     global telegram_bot_token
 
+    configFileName = '..\..\elfibot0.txt'
+
     try:
-        with open("..\..\elfibot0.txt", "r") as configFile:
+        with open(configFileName, 'r') as configFile:
             telegram_bot_token = configFile.read(45)
     except FileNotFoundError:
-        print("Error: Could not open config file")
+        print('Error: Could not open config file ' + configFileName)
         return
 
     print(telegram_bot_token);
