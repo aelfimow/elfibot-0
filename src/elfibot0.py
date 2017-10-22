@@ -1,17 +1,36 @@
+import socket
 import time
 import telepot
+
 from telepot.loop import MessageLoop
 from pprint import pprint
+
+def send_cmd(cmd):
+    host = 'localhost'
+    port = 50000
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((host, port))
+        s.sendall(cmd)
 
 def parse_msg(chat_id, messageText):
     timeStamp = time.asctime(time.localtime())
     if messageText == 'start':
         responseText = timeStamp + ': Command start received'
-        elfibot0.sendMessage(chat_id, responseText)
+        result = ''
+        try:
+            send_cmd(b'start')
+        except:
+            result = '(result: error)'
+        elfibot0.sendMessage(chat_id, responseText + ' ' + result)
         return
     if messageText == 'stop':
         responseText = timeStamp + ': Command stop received'
-        elfibot0.sendMessage(chat_id, responseText)
+        result = ''
+        try:
+            send_cmd(b'stop')
+        except:
+            result = '(result: error)'
+        elfibot0.sendMessage(chat_id, responseText + ' ' + result)
         return
 
     errorMsg = timeStamp + ': Unknown command received: ' + messageText
