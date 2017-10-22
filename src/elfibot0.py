@@ -1,7 +1,13 @@
 import telepot
 from pprint import pprint
 
-elfibot0 = telepot.Bot('')
+def elfibot0_main():
+    global elfibot0
 
-elfibot0_Info = elfibot0.getMe()
-pprint(elfibot0_Info)
+    elfibot0 = telepot.Bot('')
+
+    elfibot0_Info = elfibot0.getMe()
+    pprint(elfibot0_Info)
+
+if __name__ == '__main__':
+    elfibot0_main()
