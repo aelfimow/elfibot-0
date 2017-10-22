@@ -4,14 +4,17 @@ from telepot.loop import MessageLoop
 from pprint import pprint
 
 def parse_msg(chat_id, messageText):
+    timeStamp = time.asctime(time.localtime())
     if messageText == 'start':
-        elfibot0.sendMessage(chat_id, 'Command start received')
+        responseText = timeStamp + ': Command start received'
+        elfibot0.sendMessage(chat_id, responseText)
         return
     if messageText == 'stop':
-        elfibot0.sendMessage(chat_id, 'Command stop received')
+        responseText = timeStamp + ': Command stop received'
+        elfibot0.sendMessage(chat_id, responseText)
         return
 
-    errorMsg = 'Unknown command received: ' + messageText
+    errorMsg = timeStamp + ': Unknown command received: ' + messageText
     print(errorMsg)
     elfibot0.sendMessage(chat_id, errorMsg)
 
@@ -22,7 +25,8 @@ def elfibot0_msg_handler(msg):
         parse_msg(chat_id, messageText)
         return
 
-    errorMsg = 'Unknown content type: ' + content_type
+    timeStamp = time.asctime(time.localtime())
+    errorMsg = timeStamp + ': Unknown content type: ' + content_type
     print(errorMsg)
     elfibot0.sendMessage(chat_id, errorMsg)
 
