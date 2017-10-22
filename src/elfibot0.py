@@ -3,11 +3,22 @@ import telepot
 from telepot.loop import MessageLoop
 from pprint import pprint
 
+def parse_msg(chat_id, messageText):
+    if messageText == 'start':
+        elfibot0.sendMessage(chat_id, 'Command start received')
+        return
+    if messageText == 'stop':
+        elfibot0.sendMessage(chat_id, 'Command stop received')
+        return
+
+    elfibot0.sendMessage(chat_id, 'Unknown command received: ' + messageText)
+
 def elfibot0_msg_handler(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print(content_type, chat_type, chat_id)
     if content_type == 'text':
-        elfibot0.sendMessage(chat_id, msg['text'])
+        messageText = msg['text']
+        parse_msg(chat_id, messageText)
 
 def elfibot0_main():
     global elfibot0
