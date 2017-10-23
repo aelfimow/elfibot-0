@@ -15,22 +15,24 @@ def send_cmd(cmd):
 def parse_msg(chat_id, messageText):
     timeStamp = time.asctime(time.localtime())
     if messageText == 'start':
-        responseText = timeStamp + ': Command start received'
-        result = ''
+        result = 'ok'
         try:
             send_cmd(b'start')
         except:
             result = '(result: error)'
-        elfibot0.sendMessage(chat_id, responseText + ' ' + result)
+        responseText = timeStamp + ': Command start received' + ' ' + result
+        print(responseText)
+        elfibot0.sendMessage(chat_id, responseText)
         return
     if messageText == 'stop':
-        responseText = timeStamp + ': Command stop received'
-        result = ''
+        result = 'ok'
         try:
             send_cmd(b'stop')
         except:
             result = '(result: error)'
-        elfibot0.sendMessage(chat_id, responseText + ' ' + result)
+        responseText = timeStamp + ': Command stop received' + ' ' + result
+        print(responseText)
+        elfibot0.sendMessage(chat_id, responseText)
         return
 
     errorMsg = timeStamp + ': Unknown command received: ' + messageText
