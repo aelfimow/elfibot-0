@@ -1,4 +1,4 @@
-[![elfibit-0 logo](elfibit-0.png)](https://github.com/aelfimow/elfibot-0/blob/master/elfibot-0.png)
+[![elfibot-0 logo](elfibot-0.png)](https://github.com/aelfimow/elfibot-0/blob/master/elfibot-0.png)
 # elfibot-0
 My Telegram bot for starting/stopping various tasks.
 
